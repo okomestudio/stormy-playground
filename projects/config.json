@@ -1,0 +1,23 @@
+{
+    "library": "",
+    "topology_specs": "topologies/",
+    "virtualenv_specs": "virtualenvs/",
+    "envs": {
+        "prod": {
+            "user": "storm",
+            "nimbus": "192.168.56.2",
+            "workers": [
+                "192.168.56.3",
+                "192.168.56.4",
+                "192.168.56.5"
+            ],
+            "log": {
+                "path": "",
+                "max_bytes": 1000000,
+                "backup_count": 10,
+                "level": "info"
+            },
+            "virtualenv_root": "/home/storm/virtualenv_root"
+        }
+    }
+}
