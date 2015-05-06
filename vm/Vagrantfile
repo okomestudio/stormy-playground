@@ -3,27 +3,37 @@
 
 common = <<-EOF
 sudo apt-get update
-sudo apt-get install -y openjdk-7-jre openssh-server python-dev python-virtualenv supervisor
-sudo apt-get install -y git s3cmd
+sudo apt-get install -y openjdk-7-jre openssh-server python-dev python-virtualenv supervisor 
+
+sudo apt-get install -y git
+sudo apt-get install -y libxml2 libxml2-dev libxslt1-dev 
+
+sudo pip install --upgrade pip
 
 tar xzf /vagrant/apache-storm-0.9.3.tar.gz -C /opt
 cp /vagrant/storm.yaml /opt/apache-storm-0.9.3/conf/storm.yaml
 
-sudo sh -c 'cat /vagrant/hosts >>/etc/hosts'
+sudo sh -c 'cat /vagrant/hosts >> /etc/hosts'
 
 sudo useradd -mU storm
 sudo -u storm mkdir /home/storm/.ssh
 sudo chmod 700 /home/storm/.ssh
+sudo -u storm mkdir /home/storm/logs
+sudo chmod 755 /home/storm/logs
 sudo cp /vagrant/sshkey.pub /home/storm/.ssh/authorized_keys
-sudo cp /vagrant/sshkey.pub /home/storm/.ssh/id_rsa.pub
-sudo cp /vagrant/sshkey /home/storm/.ssh/id_rsa
-sudo cp /vagrant/sshconfig /home/storm/.ssh/config
+# sudo cp /vagrant/sshkey.pub /home/storm/.ssh/id_rsa.pub
+# sudo cp /vagrant/sshkey /home/storm/.ssh/id_rsa
+# sudo cp /vagrant/sshconfig /home/storm/.ssh/config
 sudo chown storm:storm /home/storm/.ssh/authorized_keys
-sudo chown storm:storm /home/storm/.ssh/id_rsa.pub
-sudo chown storm:storm /home/storm/.ssh/id_rsa
-sudo chown storm:storm /home/storm/.ssh/config
-sudo chmod 644 /home/storm/.ssh/id_rsa.pub
-sudo chmod 600 /home/storm/.ssh/id_rsa
+# sudo chown storm:storm /home/storm/.ssh/id_rsa.pub
+# sudo chown storm:storm /home/storm/.ssh/id_rsa
+# sudo chown storm:storm /home/storm/.ssh/config
+# sudo chmod 644 /home/storm/.ssh/id_rsa.pub
+# sudo chmod 600 /home/storm/.ssh/id_rsa
+
+sudo cp /vagrant/boto.cfg /etc/boto.cfg
+sudo chmod 644 /etc/boto.cfg
+
 sudo -u storm mkdir /home/storm/virtualenv_root
 sudo chown -R storm:storm /opt/apache-storm-0.9.3
 
@@ -46,6 +56,9 @@ EOF
 # just start a worker
 worker_setup = <<-EOF
 sudo supervisorctl start storm-worker
+
+sudo chmod 755 /vagrant/src
+sudo chmod 644 /vagrant/src/*
 EOF
 
 Vagrant.configure(2) do |config|
