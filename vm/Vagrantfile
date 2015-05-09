@@ -21,19 +21,7 @@ sudo chmod 700 /home/storm/.ssh
 sudo -u storm mkdir /home/storm/logs
 sudo chmod 755 /home/storm/logs
 sudo cp /vagrant/sshkey.pub /home/storm/.ssh/authorized_keys
-<<<<<<< HEAD
 sudo chown storm:storm /home/storm/.ssh/authorized_keys
-=======
-# sudo cp /vagrant/sshkey.pub /home/storm/.ssh/id_rsa.pub
-# sudo cp /vagrant/sshkey /home/storm/.ssh/id_rsa
-# sudo cp /vagrant/sshconfig /home/storm/.ssh/config
-sudo chown storm:storm /home/storm/.ssh/authorized_keys
-# sudo chown storm:storm /home/storm/.ssh/id_rsa.pub
-# sudo chown storm:storm /home/storm/.ssh/id_rsa
-# sudo chown storm:storm /home/storm/.ssh/config
-# sudo chmod 644 /home/storm/.ssh/id_rsa.pub
-# sudo chmod 600 /home/storm/.ssh/id_rsa
->>>>>>> bc5fc6a80bb074ab70fcc99bb706cfc1bae06ef4
 
 sudo cp /vagrant/boto.cfg /etc/boto.cfg
 sudo chmod 644 /etc/boto.cfg
