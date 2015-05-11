@@ -6,7 +6,8 @@ sudo apt-get update
 sudo apt-get install -y openjdk-7-jre openssh-server python-dev python-virtualenv supervisor 
 
 sudo apt-get install -y git
-sudo apt-get install -y libxml2 libxml2-dev libxslt1-dev 
+sudo apt-get install -y libxml2 libxml2-dev libxslt1-dev
+sudo apt-get install -y llvm-dev libedit-dev
 
 sudo pip install --upgrade pip
 
