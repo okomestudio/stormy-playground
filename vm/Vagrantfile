@@ -8,6 +8,7 @@ sudo apt-get install -y openjdk-7-jre openssh-server python-dev python-virtualen
 sudo apt-get install -y git
 sudo apt-get install -y libxml2 libxml2-dev libxslt1-dev
 sudo apt-get install -y llvm-dev libedit-dev
+sudo apt-get install -y python-pip
 
 sudo pip install --upgrade pip
 
@@ -58,7 +59,8 @@ Vagrant.configure(2) do |config|
 
   # one nimbus
   config.vm.define "nimbus" do |nimbus|
-	nimbus.vm.box = "chef/debian-7.6"
+	#nimbus.vm.box = "chef/debian-7.6"
+	nimbus.vm.box = "deb/jessie-amd64"
 	nimbus.vm.hostname = "nimbus"
 	nimbus.vm.network "private_network", ip: "192.168.56.2"
 	nimbus.vm.provision "shell", inline: common
@@ -68,7 +70,8 @@ Vagrant.configure(2) do |config|
   # 3 worker boxes
   (1..3).each do |i|
 	config.vm.define "worker#{i}" do |worker|
-	  worker.vm.box = "chef/debian-7.6"
+	  #worker.vm.box = "chef/debian-7.6"
+	  worker.vm.box = "deb/jessie-amd64"
 	  worker.vm.hostname = "worker#{i}"
 	  worker.vm.network "private_network", ip: "192.168.56.#{i+2}"
 	  worker.vm.provision "shell", inline: common
